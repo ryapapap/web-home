@@ -22,9 +22,9 @@ const Options: React.FC<OptionsProps & ChatProps> = ({
   }
 
   const style = useSpring({
-    transform: 'scale(1.0)',
+    transform: 'scaleY(1.0)',
     from: {
-      transform: 'scale(0.0)',
+      transform: 'scaleY(0.0)',
     },
     config: {
       mass: 1,
@@ -32,6 +32,17 @@ const Options: React.FC<OptionsProps & ChatProps> = ({
       friction: 27,
     },
   });
+
+  // a little hacky, but I want
+  // 2 or less options side by side,
+  // >2 to list horizontally
+  const questionsStyle: React.CSSProperties = options.length > 2 ?
+   {
+      flexBasis: 250,
+      flexGrow: 1,
+    } 
+  : 
+    {};
 
   return (
     <>
@@ -41,20 +52,22 @@ const Options: React.FC<OptionsProps & ChatProps> = ({
       side="right"
       enqueue={enqueue}
     />}
-    {selected === null && <div className="input-container">
+    {selected === null && <animated.div 
+      className="input-container"
+      style={style}
+    >
       <div className="chat-options">
         {_.map(options, (option, i) => 
-          <animated.div key={i} style={style}>
             <button 
               className="chat-option" 
               onClick={() => onSelected(i)}
+              style={questionsStyle}
             >
               {option.text}
             </button>
-          </animated.div>
         )}
       </div>
-    </div>}
+    </animated.div>}
     </>
   );
 };

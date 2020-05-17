@@ -6,14 +6,6 @@ import Options from './options';
 import { IChat, CHAT_TYPE, IMessage } from './utils';
 import './chat.css';
 
-/*
-  TODO:
-    animate for form and options
-    how do lots of options look ?
-    styling of buttons (and some drop shadow?)
-    should I set a max columns for textarea?
-*/
-
 
 interface ChatManagerProps {
   chats: IChat[];

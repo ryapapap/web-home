@@ -33,9 +33,9 @@ const Input: React.FC<InputProps & ChatProps> = ({
   }
 
   const style = useSpring({
-    transform: 'scale(1.0)',
+    transform: 'scaleY(1.0)',
     from: {
-      transform: 'scale(0.0)',
+      transform: 'scaleY(0.0)',
     },
     config: {
       mass: 1,
@@ -52,11 +52,11 @@ const Input: React.FC<InputProps & ChatProps> = ({
         side="right"
         enqueue={enqueue}
       />}
-      {!submitted && <div className="input-container">
-        <animated.div 
-          className="chat-input"
-          style={style}
-        >
+      {!submitted && <animated.div 
+        className="input-container"
+        style={style}
+      >
+        <div className="chat-input">
           <TextareaAutosize
             inputRef={inputRef}
             onKeyPress={onKeyPress}
@@ -67,8 +67,8 @@ const Input: React.FC<InputProps & ChatProps> = ({
           >
             <AiOutlineSend />
           </button>
-        </animated.div>
-      </div>}
+        </div>
+      </animated.div>}
     </>
   );
 };

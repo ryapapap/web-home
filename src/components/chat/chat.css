@@ -32,6 +32,7 @@ $right-color: #b0db8f;
 
 .chat-msg {
   @include shared-msg;
+  box-shadow: 1px 1px 1px 0px #c1b1b1;
   
   &.right {
     background: $right-color;
@@ -73,20 +74,21 @@ $right-color: #b0db8f;
 }
 
 .chat-input {
+  position: relative;
   border-radius: .7em;
   padding: 10px 0 0;
   width: 75%;
+  box-shadow: 1.5px 1.5px 2px 0px #c1b1b1;
 
 	background: $left-color;
-  transform-origin: top right;
-  align-self: flex-end;
   
   & textarea {
     border: none;
     background: transparent;
     resize: none;
     outline: none;
-    padding: 0 25px 0 15px;
+    width: 100%;
+    padding: 0 30px 0 15px;
   }
 
   & .chat-submit {
@@ -110,27 +112,25 @@ $right-color: #b0db8f;
 
 .chat-options {
   display: flex;
-
-  & > div {
-    transform-origin: top right;
-    
-    &:not(:last-of-type) {
-      margin-right: 2.5px;
-    }
-  }
+  flex-wrap: wrap;
+  justify-content: center;
 }
 
 .chat-option {
   @include shared-msg;
+  border-radius: 0.5em;
   border: none;
+  box-shadow: 1.5px 1.5px 2px 0px #c1b1b1;
   outline: none;
   cursor: pointer;
 
+  &:not(:last-of-type) {
+    margin-right: 5px;
+  }
+
   background: $right-color;
-  opacity: 0.8;
 
   &:hover {
-    opacity: 0.6;
   }
 
   &:active {
