@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import _ from 'lodash';
 import Message from './message';
 import Input from './input';
@@ -11,8 +11,6 @@ import './chat.css';
     maybe reuse chat-msg more ?
     animate for form and options
     how do lots of options look ?
-    just make sure mobile isn't fucked, ok?
-    should manager handle delay?
 */
 
 
@@ -20,20 +18,15 @@ interface ChatManagerProps {
   chats: IChat[];
 }
 
-function immutablePop<T>(arr: T[]): [T, T[]] {
-  return [_.first(arr), arr.slice(1, arr.length)];
-}
-
 const Chat: React.FC<ChatManagerProps> = (props) => {
-  const [popped, newChats] = immutablePop(props.chats);
-  const [queue, setQueue] = useState<IChat[]>(newChats);
-  const [chats, setChats] = useState<IChat[]>([popped]);
+  const [queue, setQueue] = useState<IChat[]>(props.chats);
+  const [chats, setChats] = useState<IChat[]>([]);
 
   const next = (queueParam?: IChat[]) => {
-    const [popped, newQueue] = immutablePop(queueParam || queue);
+    const popped = _.first(queueParam || queue);
     if (popped) {
-      setQueue(newQueue);
-      setChats([...chats, popped]);
+      setQueue((q) => q.slice(1, q.length));
+      setChats((c) => [...c, popped]);
     }
   }
 
@@ -41,6 +34,14 @@ const Chat: React.FC<ChatManagerProps> = (props) => {
     const combined = [...queue, ...items];
     next(combined);
   }
+
+  useEffect(() => {
+    const nextMsg = _.first(queue);
+    const timeout = setTimeout(next, nextMsg && nextMsg.delay || 0);
+    return () => {
+      clearTimeout(timeout);
+    }
+  }, [queue]);
 
   const chatProps = {next, enqueue};
 
@@ -60,6 +61,7 @@ const Chat: React.FC<ChatManagerProps> = (props) => {
             return <Input key={i} {...chat} {...chatProps} />
           case CHAT_TYPE.interaction:
             // todo: should we limit this to once? or be on caller or smth?
+            // caller should maybe be a component
             chat.action();
             return;
           default:

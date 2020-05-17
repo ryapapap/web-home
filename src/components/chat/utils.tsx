@@ -11,6 +11,7 @@ export enum CHAT_TYPE {
 
 export interface IMessage extends MessageProps {
   type: typeof CHAT_TYPE.message;
+  delay?: number;
 }
 
 export interface IOption {
@@ -20,14 +21,17 @@ export interface IOption {
 
 export interface IOptionMessage extends OptionsProps {
   type: typeof CHAT_TYPE.option;
+  delay?: number;
 }
 
 export interface IInputMessage extends InputProps {
   type: typeof CHAT_TYPE.input;
+  delay?: number;
 }
 
 export interface IInteractionMessage {
   type: typeof CHAT_TYPE.interaction;
+  delay?: number;
   action: () => void;
 }
 

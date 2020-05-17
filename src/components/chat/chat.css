@@ -24,9 +24,7 @@ $right-color: #b0db8f;
 .chat {
   margin: 15px 20px;
   padding: 20px 10px;
-  height: 500px;
-
-  width: 500px;
+  max-width: 500px;
 
   display: flex;
   flex-direction: column;

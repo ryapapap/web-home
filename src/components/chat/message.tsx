@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import { useSpring, animated } from 'react-spring';
 import { ChatProps } from './utils';
 
@@ -6,7 +6,6 @@ export interface MessageProps {
   msg: string;
   tail: boolean;
   side?: 'left' | 'right';
-  delay?: number; 
 }
 
 const Message: React.FC<MessageProps & ChatProps> = ({
@@ -14,15 +13,8 @@ const Message: React.FC<MessageProps & ChatProps> = ({
   msg,
   tail,
   side = 'left',
-  delay = 600,
   next,
 }) => {
-
-  useEffect(() => {
-    const timeout = setTimeout(next, delay);
-    return () => clearTimeout(timeout);
-  }, []);
-
   const style = useSpring({
     transform: 'scale(1.0)',
     from: {

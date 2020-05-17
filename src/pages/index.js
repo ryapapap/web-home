@@ -20,10 +20,11 @@ const IndexPage = () => (
     <Chat 
       chats={[
         { type: 'message', msg: `Hey, thanks for coming` },
-        { type: 'message', msg: `normally I'd ask you to take your shoes off...`},
-        { type: 'message', msg: `but since we're online, how about we take a deep breathe together?`, delay: 300 },
+        { type: 'message', msg: `normally I'd ask you to take your shoes off...`, delay: 600},
+        { type: 'message', msg: `but since we're online, how about we take a deep breathe together?`, delay: 600 },
         { 
-          type: 'options', 
+          type: 'options',
+          delay: 300,
           options: [
             { 
               text: 'ok', 
