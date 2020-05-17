@@ -1,0 +1,159 @@
+$left-color: #E5E5EA;
+$right-color: #b0db8f;
+
+@mixin tail {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  width: 0;
+  height: 0;
+  border: 8px solid transparent;
+  border-bottom: 0;
+  margin-left: -4px;
+  margin-bottom: -8px;
+}
+
+@mixin shared-msg {
+  position: relative;
+  max-width: 270px;
+  border-radius: .7em;
+  padding: 10px 15px;
+  margin: 2.5px 0;
+}
+
+.chat {
+  margin: 15px 20px;
+  padding: 20px 10px;
+  height: 500px;
+
+  width: 500px;
+
+  display: flex;
+  flex-direction: column;
+}
+
+.chat-msg {
+  @include shared-msg;
+  
+  &.right {
+    background: $right-color;
+    transform-origin: top right;
+    align-self: flex-end;
+
+    &.tail:after {
+      @include tail;
+
+      border-top-color: $right-color;
+      right: 10px;
+      border-right: 0;
+    }
+  }
+
+  &.left {
+    background: $left-color;
+    transform-origin: top left;
+    align-self: flex-start;
+
+    &.tail:after {
+      @include tail;
+
+      border-top-color: $left-color;
+      left: 15px;
+      border-left: 0;
+    }
+  }
+}
+
+.chat-input {
+  @include shared-msg;
+  padding: 10px 0 0;
+
+	background: $left-color;
+  transform-origin: top right;
+  align-self: flex-end;
+
+  &.submitted {
+    background: $right-color;
+
+    &:after {
+      @include tail;
+
+      border-top-color: $right-color;
+      right: 10px;
+      border-right: 0;
+    }
+  }
+  
+  & textarea {
+    border: none;
+    background: transparent;
+    resize: none;
+    outline: none;
+    width: 260px;
+    padding: 0 25px 0 15px;
+  }
+
+  & .chat-submit {
+    position: absolute;
+    right: 0;
+    bottom: 2px;
+  
+    border: none;
+    background: transparent;
+    
+    color: #65854c;
+  
+    cursor: pointer;
+    outline: none;
+  
+    &:active {
+      transform: scale(0.9);
+    }
+  }
+}
+
+.chat-options {
+  display: flex;
+  transform-origin: top right;
+  align-self: flex-end;
+
+  & > div {
+    transform-origin: top right;
+    
+    &:not(:last-of-type) {
+      margin-right: 2.5px;
+    }
+  }
+}
+
+.chat-option {
+  @include shared-msg;
+  border: none;
+  outline: none;
+
+  background: $right-color;
+
+  &:not(.selected) {
+    cursor: pointer;
+    opacity: 0.8;
+
+    &:hover {
+      opacity: 0.6;
+    }
+
+    &:active {
+      opacity: 1;
+      transform: scale(0.95);
+    }
+  }
+
+  &.selected {
+    &:after {
+      @include tail;
+
+      border-top-color: $right-color;
+      right: 10px;
+      border-right: 0;
+    }
+  }
+}
