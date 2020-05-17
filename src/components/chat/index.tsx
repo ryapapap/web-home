@@ -8,9 +8,10 @@ import './chat.css';
 
 /*
   TODO:
-    maybe reuse chat-msg more ?
     animate for form and options
     how do lots of options look ?
+    styling of buttons (and some drop shadow?)
+    should I set a max columns for textarea?
 */
 
 
@@ -43,7 +44,7 @@ const Chat: React.FC<ChatManagerProps> = (props) => {
     }
   }, [queue]);
 
-  const chatProps = {next, enqueue};
+  const chatProps = {enqueue};
 
   return (
     <div className="chat">

@@ -38,6 +38,5 @@ export interface IInteractionMessage {
 export type IChat = IMessage | IOptionMessage | IInputMessage | IInteractionMessage;
 
 export interface ChatProps {
-  next: () => void;
   enqueue: (items: IChat[]) => void;
 }

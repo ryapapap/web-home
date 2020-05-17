@@ -4,7 +4,7 @@ import { ChatProps } from './utils';
 
 export interface MessageProps {
   msg: string;
-  tail: boolean;
+  tail?: boolean;
   side?: 'left' | 'right';
 }
 
@@ -13,7 +13,6 @@ const Message: React.FC<MessageProps & ChatProps> = ({
   msg,
   tail,
   side = 'left',
-  next,
 }) => {
   const style = useSpring({
     transform: 'scale(1.0)',

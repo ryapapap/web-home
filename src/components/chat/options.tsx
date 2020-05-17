@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { useSpring, animated } from 'react-spring';
 import _ from 'lodash';
 import { ChatProps, IOption } from './utils';
+import Message from './message';
 
 export interface OptionsProps {
   options: IOption[];
@@ -14,8 +15,10 @@ const Options: React.FC<OptionsProps & ChatProps> = ({
   const [selected, setSelected] = useState<number>(null);
 
   const onSelected = (i: number) => {
-    setSelected(i);
-    enqueue(options[i].result);
+    if (selected === null) {
+      setSelected(i);
+      enqueue(options[i].result);
+    }
   }
 
   const style = useSpring({
@@ -31,11 +34,16 @@ const Options: React.FC<OptionsProps & ChatProps> = ({
   });
 
   return (
-    <div className="chat-options">
-      {selected !== null ? 
-        <div className="chat-option selected">{options[selected].text}</div> 
-      : 
-        _.map(options, (option, i) => 
+    <>
+    {selected !== null && <Message 
+      msg={options[selected].text}
+      tail={true}
+      side="right"
+      enqueue={enqueue}
+    />}
+    {selected === null && <div className="input-container">
+      <div className="chat-options">
+        {_.map(options, (option, i) => 
           <animated.div key={i} style={style}>
             <button 
               className="chat-option" 
@@ -45,7 +53,9 @@ const Options: React.FC<OptionsProps & ChatProps> = ({
             </button>
           </animated.div>
         )}
-    </div>
+      </div>
+    </div>}
+    </>
   );
 };
 

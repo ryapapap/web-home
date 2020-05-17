@@ -62,32 +62,30 @@ $right-color: #b0db8f;
   }
 }
 
+.input-container {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  margin-top: 33px;
+  padding-top: 10px;
+  border-top: 1px solid lightgray;
+  transform-origin: top;
+}
+
 .chat-input {
-  @include shared-msg;
+  border-radius: .7em;
   padding: 10px 0 0;
+  width: 75%;
 
 	background: $left-color;
   transform-origin: top right;
   align-self: flex-end;
-
-  &.submitted {
-    background: $right-color;
-
-    &:after {
-      @include tail;
-
-      border-top-color: $right-color;
-      right: 10px;
-      border-right: 0;
-    }
-  }
   
   & textarea {
     border: none;
     background: transparent;
     resize: none;
     outline: none;
-    width: 260px;
     padding: 0 25px 0 15px;
   }
 
@@ -112,8 +110,6 @@ $right-color: #b0db8f;
 
 .chat-options {
   display: flex;
-  transform-origin: top right;
-  align-self: flex-end;
 
   & > div {
     transform-origin: top right;
@@ -128,30 +124,17 @@ $right-color: #b0db8f;
   @include shared-msg;
   border: none;
   outline: none;
+  cursor: pointer;
 
   background: $right-color;
+  opacity: 0.8;
 
-  &:not(.selected) {
-    cursor: pointer;
-    opacity: 0.8;
-
-    &:hover {
-      opacity: 0.6;
-    }
-
-    &:active {
-      opacity: 1;
-      transform: scale(0.95);
-    }
+  &:hover {
+    opacity: 0.6;
   }
 
-  &.selected {
-    &:after {
-      @include tail;
-
-      border-top-color: $right-color;
-      right: 10px;
-      border-right: 0;
-    }
+  &:active {
+    opacity: 1;
+    transform: scale(0.95);
   }
 }

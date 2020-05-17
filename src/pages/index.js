@@ -41,7 +41,7 @@ const IndexPage = () => (
             },
           ],
         },
-        // { type: 'input', response: 'ok, thanks!', },
+        { type: 'input', response: 'ok, thanks!', },
       ]}
     />
   </Layout>

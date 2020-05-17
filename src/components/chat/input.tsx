@@ -3,6 +3,7 @@ import { useSpring, animated } from 'react-spring';
 import TextareaAutosize from 'react-textarea-autosize';
 import { AiOutlineSend } from 'react-icons/ai';
 import { ChatProps, CHAT_TYPE } from './utils';
+import Message from './message';
 
 export interface InputProps {
   response: string;
@@ -13,12 +14,12 @@ const Input: React.FC<InputProps & ChatProps> = ({
   enqueue
 }) => {
   const inputRef = useRef<HTMLTextAreaElement>(null);
-  const [submitted, setSubmitted] = useState(false);
+  const [submitted, setSubmitted] = useState<string>(null);
 
   const onSubmit = () => {
     // TODO: send email to myself with the inputRef.current.value, yo ! (if > size..)
     if (inputRef.current.value) {
-      setSubmitted(true);
+      setSubmitted(inputRef.current.value);
       setTimeout(() => enqueue([
         { type: CHAT_TYPE.message, msg: response },
       ]), 1000);
@@ -44,22 +45,31 @@ const Input: React.FC<InputProps & ChatProps> = ({
   });
 
   return (
-    <animated.div 
-      className={`chat-input ${submitted ? 'submitted' : ''}`} 
-      style={style}
-    >
-      <TextareaAutosize
-        inputRef={inputRef}
-        onKeyPress={onKeyPress}
-        readOnly={submitted}
-      />
-      {!submitted && <button 
-        className="chat-submit" 
-        onClick={onSubmit}
-      >
-        <AiOutlineSend />
-      </button>}
-    </animated.div>
+    <>
+      {submitted && <Message 
+        msg={submitted}
+        tail={true}
+        side="right"
+        enqueue={enqueue}
+      />}
+      {!submitted && <div className="input-container">
+        <animated.div 
+          className="chat-input"
+          style={style}
+        >
+          <TextareaAutosize
+            inputRef={inputRef}
+            onKeyPress={onKeyPress}
+          />
+          <button 
+            className="chat-submit" 
+            onClick={onSubmit}
+          >
+            <AiOutlineSend />
+          </button>
+        </animated.div>
+      </div>}
+    </>
   );
 };
 
