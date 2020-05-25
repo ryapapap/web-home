@@ -28,6 +28,10 @@ $right-color: #b0db8f;
 
   display: flex;
   flex-direction: column;
+
+  position: absolute;
+  top: 0;
+  left: 50%;
 }
 
 .chat-msg {

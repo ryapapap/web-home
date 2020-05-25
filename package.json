@@ -24,7 +24,9 @@
     "react-icons": "^3.10.0",
     "react-spring": "^8.0.27",
     "react-textarea-autosize": "^7.1.2",
+    "react-three-fiber": "^4.2.5",
     "react-typography": "^0.16.19",
+    "three": "^0.116.1",
     "typography": "^0.16.19",
     "typography-theme-doelger": "^0.16.19",
     "typography-theme-noriega": "^0.16.19"

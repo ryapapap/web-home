@@ -1,10 +1,15 @@
-import React from "react"
+import React, { Suspense } from "react"
 import { Link } from "gatsby"
 
 import Layout from "../components/layout"
 import SEO from "../components/seo"
 
 import Chat from '../components/chat';
+
+import * as THREE from 'three'
+import { Canvas } from 'react-three-fiber'
+
+import Model from '../components/models/bookshelf';
 
 const Test = () => {
   return (
@@ -17,6 +22,25 @@ const IndexPage = () => (
     <SEO title="Home" />
     <Link to="/page-2/">Go to page 2</Link>
     <Test />
+    <div style={{ position: 'relative' }}>
+    <Canvas
+      shadowMap
+      style={{ background: 'orange', height: 750 }}
+      camera={{ position: [0, 0, 5], fov: 50 }}
+      gl={{ antialias: false }}
+      onCreated={({ gl }) => {
+        gl.toneMapping = THREE.Uncharted2ToneMapping
+        gl.outputEncoding = THREE.sRGBEncoding
+      }}>
+      <ambientLight intensity={0.5} />
+      <pointLight position={[-50, 0, -50]} intensity={2} />
+      <spotLight castShadow intensity={8} angle={Math.PI / 10} position={[10, 10, 10]} shadow-mapSize-width={2048} shadow-mapSize-height={2048} />
+      <Suspense fallback={null}>
+        <group position={[-1.5, -1.5, 0]} rotation={[0,3.14/2,0]}>
+          <Model />
+        </group>
+      </Suspense>
+    </Canvas>
     <Chat 
       chats={[
         { type: 'message', msg: `Hey, thanks for coming` },
@@ -44,6 +68,7 @@ const IndexPage = () => (
         { type: 'input', response: 'ok, thanks!', },
       ]}
     />
+    </div>
   </Layout>
 )
 
