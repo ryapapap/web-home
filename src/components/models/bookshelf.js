@@ -9,7 +9,7 @@ import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader'
 
 export default function Model(props) {
   const group = useRef()
-  const { nodes, materials } = useLoader(GLTFLoader, '/bookshelf.gltf')
+  const { nodes, materials } = useLoader(GLTFLoader, '/bookshelf/bookshelf.gltf')
   return (
     <group ref={group} {...props} dispose={null}>
       <group scale={[2, 0.06, 0.6]}>

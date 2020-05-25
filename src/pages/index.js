@@ -9,7 +9,7 @@ import Chat from '../components/chat';
 import * as THREE from 'three'
 import { Canvas } from 'react-three-fiber'
 
-import Model from '../components/models/bookshelf';
+import Model from '../components/models/door';
 
 const Test = () => {
   return (
@@ -30,11 +30,10 @@ const IndexPage = () => (
         gl.toneMapping = THREE.Uncharted2ToneMapping
         gl.outputEncoding = THREE.sRGBEncoding
       }}>
-      <ambientLight intensity={0.5} />
-      <pointLight position={[-50, 0, -50]} intensity={2} />
-      <spotLight castShadow intensity={8} angle={Math.PI / 10} position={[10, 10, 10]} shadow-mapSize-width={2048} shadow-mapSize-height={2048} />
+      <ambientLight intensity={0.6} />
+      <spotLight castShadow intensity={0.6} angle={Math.PI / 10} position={[10, 10, 10]} shadow-mapSize-width={2048} shadow-mapSize-height={2048} />
       <Suspense fallback={null}>
-        <group position={[-1.5, -1.5, 0]} rotation={[0,3.14/4,0]}>
+        <group position={[0, -1.5, 0]} rotation={[0,Math.PI,0]}>
           <Model />
         </group>
       </Suspense>
