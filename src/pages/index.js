@@ -21,7 +21,7 @@ const Test = () => {
 
 const IndexPage = () => (
   <Layout>
-    <SEO title="Home" />
+    <SEO title="Web Home" />
     <div style={{ position: 'relative' }}>
     <Canvas
       shadowMap

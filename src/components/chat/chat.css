@@ -30,8 +30,8 @@ $right-color: #b0db8f;
   flex-direction: column;
 
   position: absolute;
-  top: 50px;
-  left: 50%;
+  top: 18%;
+  left: 52%;
 }
 
 .chat-msg {
@@ -73,7 +73,7 @@ $right-color: #b0db8f;
   justify-content: center;
   margin-top: 33px;
   padding-top: 10px;
-  border-top: 1px solid lightgray;
+  border-top: 1px solid darkslategray;
   transform-origin: top;
 }
 
