@@ -9,7 +9,9 @@ import Chat from '../components/chat';
 import * as THREE from 'three'
 import { Canvas } from 'react-three-fiber'
 
-import Model from '../components/models/door';
+import Wall from '../components/models/wall';
+import Doorframe from '../components/models/doorframe';
+import Door from '../components/models/door';
 
 const Test = () => {
   return (
@@ -23,7 +25,7 @@ const IndexPage = () => (
     <div style={{ position: 'relative' }}>
     <Canvas
       shadowMap
-      style={{ background: 'orange', height: '100vh' }}
+      style={{ background: 'black', height: '100vh' }}
       camera={{ position: [0, 0, 5], fov: 50 }}
       gl={{ antialias: false }}
       onCreated={({ gl }) => {
@@ -31,10 +33,21 @@ const IndexPage = () => (
         gl.outputEncoding = THREE.sRGBEncoding
       }}>
       <ambientLight intensity={0.6} />
-      <spotLight castShadow intensity={0.6} angle={Math.PI / 10} position={[10, 10, 10]} shadow-mapSize-width={2048} shadow-mapSize-height={2048} />
+      <spotLight castShadow intensity={0.3} angle={Math.PI / 10} position={[10, 0, 15]} shadow-mapSize-width={2048} shadow-mapSize-height={2048} />
+      <spotLight castShadow intensity={0.3} angle={Math.PI / 10} position={[-15, 0, 15]} shadow-mapSize-width={2048} shadow-mapSize-height={2048} />
       <Suspense fallback={null}>
-        <group position={[0, -1.5, 0]} rotation={[0,Math.PI,0]}>
-          <Model />
+        <group position={[0, -2.2, 7.5]} rotation={[0,Math.PI,0]}>
+          <Wall />
+        </group>
+      </Suspense>
+      <Suspense fallback={null}>
+        <group position={[0, -2.2, 0.5]} rotation={[0,Math.PI,0]}>
+          <Doorframe />
+        </group>
+      </Suspense>
+      <Suspense fallback={null}>
+        <group position={[0, -2.2, 0.5]} rotation={[0,Math.PI,0]}>
+          <Door />
         </group>
       </Suspense>
     </Canvas>
