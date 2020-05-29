@@ -13,17 +13,41 @@ export default function Model(props) {
   return (
     <group ref={group} {...props} dispose={null}>
       <group scale={[2, 3.67, 0.1]}>
-        <mesh material={materials.phong1} geometry={nodes.pCube1.geometry} />
+        <mesh 
+          material={materials.phong1} 
+          geometry={nodes.pCube1.geometry} 
+          onClick={props.onClick}
+          onPointerOver={(e) => document.getElementsByTagName('canvas')[0].style.cursor = 'pointer'}
+          onPointerOut={(e) => document.getElementsByTagName('canvas')[0].style.cursor = 'default'}
+          />
       </group>
       <group position={[0.22, 1.77, 0]} rotation={[-Math.PI / 2, 0, 0]} scale={[0.03, 0.08, 0.03]}>
-        <mesh material={materials.phong1} geometry={nodes.pCylinder1.geometry} />
+        <mesh 
+          material={materials.phong1} 
+          geometry={nodes.pCylinder1.geometry} 
+          onClick={props.onClick}
+          onPointerOver={(e) => document.getElementsByTagName('canvas')[0].style.cursor = 'pointer'}
+          onPointerOut={(e) => document.getElementsByTagName('canvas')[0].style.cursor = 'default'}
+        />
       </group>
       <group position={[0.22, 1.77, -0.11]} scale={[0.06, 0.05, 0.04]}>
-        <mesh material={materials.phong1} geometry={nodes.pSphere1.geometry} />
+        <mesh 
+          material={materials.phong1} 
+          geometry={nodes.pSphere1.geometry} 
+          onClick={props.onClick} 
+          onPointerOver={(e) => document.getElementsByTagName('canvas')[0].style.cursor = 'pointer'}
+          onPointerOut={(e) => document.getElementsByTagName('canvas')[0].style.cursor = 'default'}
+        />
       </group>
       <group position={[0, 0, 0.22]}>
         <group position={[0.22, 1.77, -0.11]} scale={[0.06, 0.05, 0.04]}>
-          <mesh material={materials.phong1} geometry={nodes.pasted__pSphere1.geometry} />
+          <mesh 
+            material={materials.phong1} 
+            geometry={nodes.pasted__pSphere1.geometry} 
+            onClick={props.onClick} 
+            onPointerOver={(e) => document.getElementsByTagName('canvas')[0].style.cursor = 'pointer'}
+            onPointerOut={(e) => document.getElementsByTagName('canvas')[0].style.cursor = 'default'}
+          />
         </group>
       </group>
     </group>

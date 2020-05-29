@@ -127,6 +127,7 @@ $right-color: #b0db8f;
   box-shadow: 1.5px 1.5px 2px 0px #c1b1b1;
   outline: none;
   cursor: pointer;
+  transition: all 0.1s ease-out;
 
   &:not(:last-of-type) {
     margin-right: 5px;
@@ -135,10 +136,84 @@ $right-color: #b0db8f;
   background: $right-color;
 
   &:hover {
+    background: #92cd65;
   }
 
   &:active {
-    opacity: 1;
     transform: scale(0.95);
   }
+}
+
+.breathing {
+  transform-origin: bottom center;
+  font-size: 38px;
+  font-weight: bold;
+  text-align: center;
+
+  margin-top: 50px;
+
+  animation: twerk 1s infinite;
+
+  &.in {
+    animation: breatheIn 3s 1;
+    animation-timing-function: ease-in;
+    animation-fill-mode: forwards;
+  }
+
+  &.out {
+    animation: breatheOut 3s 1;
+    animation-timing-function: ease-out;
+    animation-fill-mode: forwards;
+  }
+
+  > span {
+    display: inline-block;
+    animation: twerk 0.5s infinite;
+
+    &:nth-child(even) {
+      animation: twerk 0.5s infinite 0.25s;
+    }
+  }
+}
+
+@keyframes breatheIn {
+  from {
+    transform: scale(0);
+    opacity: 0;
+    letter-spacing: -7px;
+  }
+
+  to {
+    transform: scale(1);
+    opacity: 1;
+    letter-spacing: 7px;
+  }
+}
+
+@keyframes breatheOut {
+  from {
+    transform: scale(1);
+    opacity: 1;
+    letter-spacing: 7px;
+  }
+
+  to {
+    transform: scale(0);
+    opacity: 0;
+    letter-spacing: -7px;
+  }
+}
+
+@keyframes twerk {
+  0%   { transform: rotate(0deg); }
+  25%  { transform: rotate(5deg); }
+  75%  { transform: rotate(-5deg); }
+  100% { transform: rotate(0deg); }
+}
+
+
+a.chat-option {
+  text-decoration: none;
+  color: inherit;
+  text-shadow: none;;
 }

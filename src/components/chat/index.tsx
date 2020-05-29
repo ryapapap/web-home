@@ -5,7 +5,7 @@ import Input from './input';
 import Options from './options';
 import { IChat, CHAT_TYPE, IMessage } from './utils';
 import './chat.css';
-
+import Redirect from './redirect';
 
 interface ChatManagerProps {
   chats: IChat[];
@@ -15,8 +15,8 @@ const Chat: React.FC<ChatManagerProps> = (props) => {
   const [queue, setQueue] = useState<IChat[]>(props.chats);
   const [chats, setChats] = useState<IChat[]>([]);
 
-  const next = (queueParam?: IChat[]) => {
-    const popped = _.first(queueParam || queue);
+  const next = () => {
+    const popped = _.first(queue);
     if (popped) {
       setQueue((q) => q.slice(1, q.length));
       setChats((c) => [...c, popped]);
@@ -25,7 +25,7 @@ const Chat: React.FC<ChatManagerProps> = (props) => {
 
   const enqueue = (items: IChat[]) => {
     const combined = [...queue, ...items];
-    next(combined);
+    setQueue(combined);
   }
 
   useEffect(() => {
@@ -53,10 +53,10 @@ const Chat: React.FC<ChatManagerProps> = (props) => {
           case CHAT_TYPE.input:
             return <Input key={i} {...chat} {...chatProps} />
           case CHAT_TYPE.interaction:
-            // todo: should we limit this to once? or be on caller or smth?
-            // caller should maybe be a component
-            chat.action();
-            return;
+            const { Component } = chat;
+            return <Component key={i} />;
+          case CHAT_TYPE.redirect:
+            return <Redirect key={i} {...chat} {...chatProps} />
           default:
             return null;
         }

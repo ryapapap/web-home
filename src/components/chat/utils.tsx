@@ -1,12 +1,15 @@
+import React from 'react';
 import { MessageProps } from './message';
 import { InputProps } from './input';
 import { OptionsProps } from './options';
+import { RedirectProps } from './redirect';
 
 export enum CHAT_TYPE {
   message = 'message',
   option = 'options',
   input = 'input',
   interaction = 'interaction',
+  redirect = 'redirect',
 }
 
 export interface IMessage extends MessageProps {
@@ -32,10 +35,15 @@ export interface IInputMessage extends InputProps {
 export interface IInteractionMessage {
   type: typeof CHAT_TYPE.interaction;
   delay?: number;
-  action: () => void;
+  Component: React.FC;
 }
 
-export type IChat = IMessage | IOptionMessage | IInputMessage | IInteractionMessage;
+export interface IRedirectMessage extends RedirectProps {
+  type: typeof CHAT_TYPE.redirect;
+  delay?: number;
+}
+
+export type IChat = IMessage | IOptionMessage | IInputMessage | IInteractionMessage | IRedirectMessage;
 
 export interface ChatProps {
   enqueue: (items: IChat[]) => void;
